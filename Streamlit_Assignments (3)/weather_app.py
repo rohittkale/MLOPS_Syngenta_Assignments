@@ -1,3 +1,8 @@
+#Problem Statement 2: Create a Streamlit Application for Displaying Weather Information
+#Build a Streamlit application that takes a city name as input from the user and displays the current weather information using an external API.
+#Create a github repository, push your code, experiment with using multiple branches, and then merge your changes into the main branch.
+#Deploy your changes on Streamlit cloud
+
 import streamlit as st
 import requests
 import pandas as pd
