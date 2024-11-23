@@ -1,3 +1,8 @@
+#Problem Statement 1: Create a Streamlit Application for Visualizing CSV Data
+#Build a Streamlit application that allows users to upload a CSV file and visualize the data using basic charts like line charts, bar charts, and histograms.
+#Create a github repository, push your code, experiment with using multiple branches, and then merge your changes into the main branch.
+#Deploy your changes on Streamlit cloud
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
