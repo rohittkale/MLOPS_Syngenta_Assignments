@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Data Filter</title>
+</head>
+<body>
+    <h1>Iris Data Filter</h1>
+    <form id="filterForm">
+        <label for="species">Select Species:</label>
+        <select id="species" name="species">
+            <option value="Iris-setosa">Setosa</option>
+            <option value="Iris-versicolor">Versicolor</option>
+            <option value="Iris-virginica">Virginica</option>
+        </select>
+        <label for="feature">Select Feature:</label>
+        <select id="feature" name="feature">
+            <option value="SepalLengthCm">Sepal Length</option>
+            <option value="SepalWidthCm">Sepal Width</option>
+            <option value="PetalLengthCm">Petal Length</option>
+            <option value="PetalWidthCm">Petal Width</option>
+        </select>
+        <button type="submit">Generate</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('filterForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const species = document.getElementById('species').value;
+            const feature = document.getElementById('feature').value;
+            const response = await fetch(`/species/?species=${species}&feature=${feature}`);
+            const data = await response.json();
+            let resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (data.image) {
+                const img = document.createElement('img');
+                img.src = data.image;
+                img.alt = 'Feature Distribution';
+                img.style.width = '300px'; // Set a width for better viewing
+                resultsDiv.appendChild(img);
+
+                const link = document.createElement('a');
+                link.href = `/visualize/?species=${species}&feature=${feature}`;
+                link.target = "_blank";
+                link.innerText = 'Open Image in New Tab';
+                resultsDiv.appendChild(link);
+            }
+        }
+    </script>
+</body>
+</html>

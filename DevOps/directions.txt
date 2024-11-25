@@ -1,0 +1,81 @@
+To deploy your application on Docker and run it, follow these steps:
+
+---
+
+1. Ensure the Directory Structure
+Make sure your project directory looks like this:
+
+```
+DevOps/
+├── Dockerfile
+├── requirements.txt
+├── main.py
+├── index/
+│   └── index.html
+├── datasets/
+│   └── Iris.csv
+```
+
+- Place your `index.html` inside the `templates` folder.
+- Place your `Iris.csv` dataset inside the `datasets` folder.
+
+---
+
+2. Build the Docker Image
+Run the following command in the terminal from the root of your project directory:
+
+
+docker build -t iris-data-filter .
+
+
+This will build a Docker image named `iris-data-filter` using the instructions in your `Dockerfile`.
+
+---
+
+3. Run the Docker Container
+After building the image, you can run it with:
+
+
+docker run -d -p 8000:8000 -v "$(pwd)/datasets:/app/datasets" iris-data-filter
+
+
+- `-d`: Runs the container in detached mode.
+- `-p 8000:8000`: Maps port 8000 of your container to port 8000 of your host machine.
+- `-v $(pwd)/datasets:/app/datasets`: Mounts your local `datasets` folder to the container for dynamic dataset access.
+
+---
+
+4. Access the Application
+- Open your browser and navigate to:  
+  [http://localhost:8000](http://localhost:8000)
+
+- You can interact with the HTML form to filter Iris species data and visualize distributions.
+
+---
+
+5. Test the Endpoints
+- **Root Endpoint**:  
+  [http://localhost:8000](http://localhost:8000)
+
+- Species Data:  
+  Example:  
+  [http://localhost:8000/species/?species=Iris-setosa&feature=SepalLengthCm](http://localhost:8000/species/?species=Iris-setosa&feature=SepalLengthCm)
+
+- Visualization:  
+  Example:  
+  [http://localhost:8000/visualize/?species=Iris-setosa&feature=SepalLengthCm](http://localhost:8000/visualize/?species=Iris-setosa&feature=SepalLengthCm)
+
+---
+
+6. Stop the Container
+When done, stop the container using:
+
+docker ps
+docker stop <container_id>
+
+
+Replace `<container_id>` with the ID of your running container.
+
+
+
+Let me know if you encounter any issues!
